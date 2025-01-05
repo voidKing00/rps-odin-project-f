@@ -73,7 +73,8 @@ const parseChoice = (choice) => {
     }
 };
 
-const printWinner = (computerScore, humanScore) => computerScore > humanChoice ? alert("Winner : Computer") : alert("Winner : Human"); 
+const printWinner = (computerScore, humanScore) => computerScore > humanScore ? alert(`Winner is Computer`) : alert(`Winner is Human`);
+
 
 function playRound(humanChoice, computerChoice){
     
@@ -97,7 +98,7 @@ function playRound(humanChoice, computerChoice){
         
         if(!winnerChoice){continue;}
 
-        if (winnerChoice == computerChoice){
+        if (winnerChoice === computerChoice){
 
             computerScore++;
             alert(`You Lose! ${parseChoice(computerChoice)} beats ${parseChoice(humanChoice)}`);
