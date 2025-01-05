@@ -24,7 +24,7 @@ function parseHumanChoice(humanChoice){
     
 }
 
-let getComputerChoice =  () => Math.trunc(((Math.random() * 100) % 3) + 1);
+const getComputerChoice =  () => Math.trunc(((Math.random() * 100) % 3) + 1);
 
 const getHumanChoice = () => {
     
@@ -40,17 +40,84 @@ const getHumanChoice = () => {
     return humanChoice;
 };  
 
-const getMax = (var1, var2) => var1 > var2? var1 : var2;
-const getMin = (var2, var2) => var1 < var2? var1 :  var2;
+const getWinner = (computerChoice, humanChoice) => {
 
-let computerChoice = getComputerChoice();
-let humanChoice = getHumanChoice();
+    let combinedChoice = computerChoice + humanChoice;
 
-let computerScore = 0;
-let humanScore = 0; 
+    if(computerChoice == humanChoice){
+        
+        return 0;
 
-console.log(computerChoice);
-console.log(humanChoice);
+    }else if(combinedChoice === 4){
+        
+        return computerChoice < humanChoice ? computerChoice : humanChoice;
 
+    }else{
+        
+        return computerChoice > humanChoice ? computerChoice: humanChoice;
+    
+    }   
+};
 
+const parseChoice = (choice) => {
+    
+    switch(choice){
+        
+        case 1:
+            return "ROCK";
+        case 2:
+            return "PAPER";
+        case 3: 
+            return "SCISSOR";
+           
+    }
+};
+
+const printWinner = (computerScore, humanScore) => computerScore > humanChoice ? alert("Winner : Computer") : alert("Winner : Human"); 
+
+function playRound(humanChoice, computerChoice){
+    
+    const gameRounds = 5;
+    let currentGameRound = 1;
+
+    let computerScore = 0;
+    let humanScore = 0;
+
+    while(currentGameRound <= 5){
+
+        console.log("GAME START");
+        console.log(`Round ${currentGameRound}`);
+        computerChoice = getComputerChoice();
+        humanChoice = getHumanChoice();
+
+        console.log(`Computer Choice : ${computerChoice}`);
+        console.log(`Human Choice : ${humanChoice}`);
+
+        let winnerChoice = getWinner(computerChoice, humanChoice);
+        
+        if(!winnerChoice){continue;}
+
+        if (winnerChoice == computerChoice){
+
+            computerScore++;
+            alert(`You Lose! ${parseChoice(computerChoice)} beats ${parseChoice(humanChoice)}`);
+        
+        }else{
+
+            humanScore++;
+            alert(`You Win! ${parseChoice(humanChoice)} beats ${parseChoice(computerChoice)}`);
+        }
+
+        currentGameRound++;
+
+    } 
+
+    printWinner(computerScore, humanScore);
+
+}
+
+let computerChoice;
+let humanChoice;
+
+playRound(computerChoice, humanChoice);
 
