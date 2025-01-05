@@ -109,7 +109,13 @@ function playRound(humanChoice, computerChoice){
             alert(`You Win! ${parseChoice(humanChoice)} beats ${parseChoice(computerChoice)}`);
         }
 
+        if (computerScore >= 3 || humanScore >= 3){
+            
+            break;
+        }
+
         currentGameRound++;
+        
 
     } 
 
