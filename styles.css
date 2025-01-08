@@ -1,0 +1,51 @@
+*{
+
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+    font-family: "Jersey 15", sans-serif;
+    border: 1px solid firebrick;
+    
+  /* Finishing Touch
+
+    background-color: black;
+    color: #4AF626; */
+
+}
+
+body{
+
+    border: 1px dotted blue;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    
+    margin: 30px 0px 30px;
+    font-size: 128px;
+}
+
+.screen-container{
+    
+    width: 75%;
+    height: 500px;
+    border: 1px solid green;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+
+button{
+    
+    border-radius: 12px;
+    width: 200px;
+    height: 100px;
+    padding: 10px;
+    font-size: 36px;
+}
+
