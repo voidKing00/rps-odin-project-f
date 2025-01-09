@@ -5,7 +5,7 @@
     box-sizing: border-box;
     font-family: "Jersey 15", sans-serif;
     border: 1px solid firebrick;
-    
+
   /* Finishing Touch
 
     background-color: black;
@@ -34,11 +34,34 @@ h1{
     height: 500px;
     border: 1px solid green;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-ar;
     margin-bottom: 30px;
+    flex-wrap: wrap;
+
 }
 
+.screen-container div{
+    margin: 15px 15px 15px;
+    width: 150px;
+    flex: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-screen{
+
+    width: 300px;
+}
+
+
+.control-panel{
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
 
 button{
     
@@ -47,5 +70,14 @@ button{
     height: 100px;
     padding: 10px;
     font-size: 36px;
+    
+}
+
+.attack-container{
+
+    width: 100%;
+    display:none;
+    justify-content: space-evenly;
+    align-items: center;
 }
 

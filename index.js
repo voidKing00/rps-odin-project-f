@@ -1,44 +1,5 @@
-function parseHumanChoice(humanChoice){
-    
-    humanChoice = humanChoice.toLowerCase();
-
-    switch(humanChoice){
-
-        case "rock":
-            
-            return 1; 
-        
-        case "paper":
-            
-            return 2;
-        
-        case "scissor":
-        case "scissors":
-
-            return 3;
-        
-        default:
-
-            return 0;
-    }
-    
-}
-
+const ATTACK_TYPE = ["ROCK", "PAPER", "SCISSOR"];
 const getComputerChoice =  () => Math.trunc(((Math.random() * 100) % 3) + 1);
-
-const getHumanChoice = () => {
-    
-    let humanChoice;
-
-    do{
-
-       humanChoice = parseHumanChoice(prompt("choice: ")); 
-    }
-
-    while(!humanChoice);
-
-    return humanChoice;
-};  
 
 const getWinner = (computerChoice, humanChoice) => {
 
@@ -59,72 +20,70 @@ const getWinner = (computerChoice, humanChoice) => {
     }   
 };
 
-const parseChoice = (choice) => {
-    
-    switch(choice){
-        
-        case 1:
-            return "ROCK";
-        case 2:
-            return "PAPER";
-        case 3: 
-            return "SCISSOR";
-           
-    }
-};
-
 const printWinner = (computerScore, humanScore) => computerScore > humanScore ? alert(`Winner is Computer`) : alert(`Winner is Human`);
 
+const manipulateEntityScreen = (entityScreen, attackInput) => {entityScreen.textContent = `${ATTACK_TYPE[attackInput-1]}`};
 
-function playRound(humanChoice, computerChoice){
+function playRound(humanChoice, entities, screens){
+     
+    let computerChoice = getComputerChoice();
+
+    manipulateEntityScreen(screens[1], humanChoice);
+    manipulateEntityScreen(screens[2], computerChoice);
+
+    let winnerChoice = getWinner(humanChoice, computerChoice);
     
-    const gameRounds = 5;
-    let currentGameRound = 1;
+    if (winnerChoice === 0){
 
-    let computerScore = 0;
-    let humanScore = 0;
+        screens[0].textContent = `DRAW`;
 
-    while(currentGameRound <= 5){
-
-        console.log("GAME START");
-        console.log(`Round ${currentGameRound}`);
-        computerChoice = getComputerChoice();
-        humanChoice = getHumanChoice();
-
-        console.log(`Computer Choice : ${computerChoice}`);
-        console.log(`Human Choice : ${humanChoice}`);
-
-        let winnerChoice = getWinner(computerChoice, humanChoice);
+    }else if(winnerChoice === humanChoice){
         
-        if(!winnerChoice){continue;}
+        screens[0].textContent = "Winner is Human"
+        entities[0]++;
 
-        if (winnerChoice === computerChoice){
+    }else{
 
-            computerScore++;
-            alert(`You Lose! ${parseChoice(computerChoice)} beats ${parseChoice(humanChoice)}`);
-        
-        }else{
+        screens[0].textContent = "Winner is Computer"
+        entities[1]++;
+    }
 
-            humanScore++;
-            alert(`You Win! ${parseChoice(humanChoice)} beats ${parseChoice(computerChoice)}`);
-        }
 
-        if (computerScore >= 3 || humanScore >= 3){
-            
-            break;
-        }
+    console.log(`human : ${entities[0]}`)
+    console.log(`computer : ${entities[1]}`)
 
-        currentGameRound++;
-        
+    if(entities[0] === 3 || entities[1] === 3){
 
-    } 
-
-    printWinner(computerScore, humanScore);
-
+        alert("GAME OVER!!");
+    
+    }
 }
 
-let computerChoice;
-let humanChoice;
+const entities = [0, 0];
+const gameStartButton = document.querySelector("#game-start");
+const attackContainer = document.querySelector(".attack-container");
+const screens = [
 
-playRound(computerChoice, humanChoice);
+    document.querySelector("#main-screen"),
+    document.querySelector("#human-screen"),
+    document.querySelector("#computer-screen")
+]
+
+const rockButton = document.querySelector("#rock-button");
+const paperButton = document.querySelector("#paper-button");
+const scissorButton = document.querySelector("#scissor-button");
+
+gameStartButton.addEventListener("click", () => {
+    
+    
+    gameStartButton.parentNode.style.display = "none";
+    attackContainer.style.display = "flex";
+    screens[0].textContent = "Select your attack";
+
+  
+});
+
+rockButton.addEventListener("click", () => playRound(1, entities, screens));
+paperButton.addEventListener("click", () => playRound(2, entities, screens));  
+scissorButton.addEventListener("click", () => playRound(3, entities, screens));
 
