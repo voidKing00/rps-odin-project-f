@@ -40,20 +40,43 @@ h1{
 
 }
 
-.screen-container div{
+.screen-container > * {
+
     margin: 15px 15px 15px;
+
+}
+
+.entity-screen{
+
     width: 150px;
     flex: auto;
     display: flex;
     justify-content: center;
     align-items: center;
+
 }
 
-#main-screen{
+#main-screen {
 
+    flex: auto;
     width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+
 }
 
+#main-screen p{
+
+    padding: 5px;
+    width: fit-content;
+}
+
+#prompt-screen{
+
+    align-self: center;
+ 
+}
 
 .control-panel{
     

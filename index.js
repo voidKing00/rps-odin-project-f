@@ -24,6 +24,8 @@ const printWinner = (computerScore, humanScore) => computerScore > humanScore ? 
 
 const manipulateEntityScreen = (entityScreen, attackInput) => {entityScreen.textContent = `${ATTACK_TYPE[attackInput-1]}`};
 
+
+
 function playRound(humanChoice, entities, screens){
      
     let computerChoice = getComputerChoice();
@@ -39,7 +41,7 @@ function playRound(humanChoice, entities, screens){
 
     }else if(winnerChoice === humanChoice){
         
-        screens[0].textContent = "Winner is Human"
+        screens[0].textContent= "Winner is Human"
         entities[0]++;
 
     }else{
@@ -53,18 +55,25 @@ function playRound(humanChoice, entities, screens){
     console.log(`computer : ${entities[1]}`)
 
     if(entities[0] === 3 || entities[1] === 3){
-
-        alert("GAME OVER!!");
-    
+   
+        gameStartButton.textContent = "Restart?";
+        gameStartButton.parentNode.style.display = "flex";
+        attackContainer.style.display = "none";
+ 
     }
 }
+
 
 const entities = [0, 0];
 const gameStartButton = document.querySelector("#game-start");
 const attackContainer = document.querySelector(".attack-container");
-const screens = [
+const restartGameButton = document.querySelector("#restart-game");
 
-    document.querySelector("#main-screen"),
+restartGameButton.style.display = "none";
+
+const screens = [
+    
+    document.querySelector("#prompt-screen"),
     document.querySelector("#human-screen"),
     document.querySelector("#computer-screen")
 ]
@@ -72,18 +81,18 @@ const screens = [
 const rockButton = document.querySelector("#rock-button");
 const paperButton = document.querySelector("#paper-button");
 const scissorButton = document.querySelector("#scissor-button");
+const promptScreen = document.querySelector("#prompt-screen");
 
 gameStartButton.addEventListener("click", () => {
     
-    
+    entities[0] = 0;
+    entities[1] = 0;
     gameStartButton.parentNode.style.display = "none";
     attackContainer.style.display = "flex";
-    screens[0].textContent = "Select your attack";
-
+    promptScreen.textContent = "Choose your attack";
   
 });
 
 rockButton.addEventListener("click", () => playRound(1, entities, screens));
 paperButton.addEventListener("click", () => playRound(2, entities, screens));  
 scissorButton.addEventListener("click", () => playRound(3, entities, screens));
-
